@@ -1,3 +1,34 @@
+
+<?php
+	//Update Country code
+
+	include 'db_connection.php';
+	$conn = OpenCon();
+
+	if(isset($_POST['updateCity'])){
+		$City_ID = $_POST['City_ID'];
+		$City_Name = $_POST['City_Name'];
+		$Country_Code = $_POST['Country_Code'];
+		$Province = $_POST['Province'];
+		$Population = $_POST['Population'];
+		
+		$sql = "UPDATE city
+			SET City_Name = '$City_Name', Country_Code = '$Country_Code', Province = '$Province', Population = '$Population'
+			WHERE City_ID = '$City_ID'";
+
+		if ($conn->query($sql) === TRUE) {
+			echo "Record updated successfully";
+		} else {
+			echo "Error updating record: " . $conn->error;
+		}
+		
+	}
+
+
+
+
+?>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -135,16 +166,16 @@
 </html>
 
 			<?php
-				  	//Connection
-					include 'db_connection.php';
-					$conn = OpenCon();
+				  	
 					
 					//Table headers
 					echo "<table border='1'>
                     <th>City Name</th >
                     <th>Country Code</th>
                     <th>Province</th>
-                    <th>Population</th>";
+					<th>Population</th>
+					<th>Update</th>
+					<th>Delete</th>";
 
 					//Display a table to user first
 					$dispall = "SELECT * FROM city";
@@ -169,7 +200,9 @@
                             echo "<td>" . utf8_encode($row['City_Name']) . "</td>";
                             echo "<td>" . utf8_encode($row['Country_Code']) . "</td>";
                             echo "<td>" . utf8_encode($row['Province']) . "</td>";
-                            echo "<td>" . utf8_encode($row['Population']) . "</td>";
+							echo "<td>" . utf8_encode($row['Population']) . "</td>";
+							echo "<td><a href='updateCity.php?id=".$row['City_ID']."'>Update</a></td>";
+							echo "<td>" . Delete . "</td>";;
                             echo "</tr>";
                         }
                     echo "</table>";

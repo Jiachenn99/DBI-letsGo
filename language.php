@@ -1,3 +1,33 @@
+<?php
+	//Update Country code
+
+	include 'db_connection.php';
+	$conn = OpenCon();
+
+	if(isset($_POST['updateLanguage'])){
+		$Country_Code = $_POST['Country_Code'];
+		$Language = $_POST['Language'];
+		$Official_Language = $_POST['Official_Language'];
+		$Percentage_of_Use = $_POST['Percentage_of_Use'];
+		
+		$sql = "UPDATE Language
+			SET Official_Language = '$Official_Language', Percentage_of_Use = '$Percentage_of_Use'
+			WHERE Country_Code = '$Country_Code' && Language = '$Language'";
+
+		if ($conn->query($sql) === TRUE) {
+			echo "Record updated successfully";
+		} else {
+			echo "Error updating record: " . $conn->error;
+		}
+		
+	}
+
+
+
+
+?>
+
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -135,16 +165,16 @@
 </html>
 
 			<?php
-				  	//Connection
-					include 'db_connection.php';
-					$conn = OpenCon();
 					
 					//Table headers
 					echo "<table border='1'>
                     <th>Country Code</th>
                     <th>Language</th>
                     <th>Official_Language</th>
-                    <th>Percentage_of_Use</th>";
+					<th>Percentage_of_Use</th>
+					<th>Update</th>
+					<th>Delete</th>"
+					;
 
 					//Display a table to user first
 					$dispall = "SELECT * FROM language";
@@ -169,7 +199,9 @@
                             echo "<td>" . utf8_encode($row['Country_Code']) . "</td>";
                             echo "<td>" . utf8_encode($row['Language']) . "</td>";
                             echo "<td>" . utf8_encode($row['Official_Language']) . "</td>";
-                            echo "<td>" . utf8_encode($row['Percentage_of_Use']) . "</td>";
+							echo "<td>" . utf8_encode($row['Percentage_of_Use']) . "</td>";
+							echo "<td><a href='updateLanguage.php?language=".$row['Language']."&country_code=".$row['Country_Code']."'>Update</a></td>";
+							echo "<td>" . Delete . "</td>";;
                             echo "</tr>";
                         }
 echo "</table>";
