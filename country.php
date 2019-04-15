@@ -1,4 +1,44 @@
+<?php
+	//Update Country code
 
+	include 'db_connection.php';
+	$conn = OpenCon();
+
+	if(isset($_POST['updateCountry'])){
+		$Country_Code = $_POST['Country_Code'];
+		$Country_Name = $_POST['Country_Name'];
+		$Continent = $_POST['Continent'];;
+		$Region	= $_POST['Region']; 
+		$Area_km2 = $_POST['Area_km2']; 
+		$Year_of_Independence =	$_POST['Year_of_Independence'];
+		$Population = $_POST['Population']; 
+		$Life_Expectancy = $_POST['Life_Expectancy']; 
+		$GNP = $_POST['GNP']; 
+		$GNP_Old = $_POST['GNP_Old']; 
+		$Alternative_Names = $_POST['Alternative_Names']; 
+		$Ruling_System = $_POST['Ruling_System']; 
+		$Founder = $_POST['Founder']; 
+		$ISO_Code = $_POST['ISO_Code'];
+		
+		$sql = "UPDATE country
+			SET Country_Name = '$Country_Name', Continent = '$Continent', Region = '$Region', Area_km2 = '$Area_km2', 
+			Year_of_Independence = '$Year_of_Independence', Population = '$Population', Life_Expectancy = '$Life_Expectancy',
+			GNP = '$GNP',GNP_Old = '$GNP_Old', Alternative_Names = '$Alternative_Names',Ruling_System = '$Ruling_System',Founder = '$Founder',
+			ISO_Code = '$ISO_Code'
+			WHERE Country_Code = '$Country_Code'";
+
+		if ($conn->query($sql) === TRUE) {
+			echo "Record updated successfully";
+		} else {
+			echo "Error updating record: " . $conn->error;
+		}
+		
+	}
+
+
+
+
+?>
 
 <!DOCTYPE html>
 <html>
@@ -140,9 +180,7 @@
 </html>
 
 			<?php
-				  	//Connection
-					include 'db_connection.php';
-					$conn = OpenCon();
+				
 					  
 					//SELECT statement
 					/*$sqlsecond = "SELECT * FROM country WHERE Country_Code = '$keyword' OR Country_Name = '$keyword' OR Continent = '$keyword' OR  Region = '$keyword' OR Area_km2 = '$keyword'
