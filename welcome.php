@@ -11,26 +11,19 @@ if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
-
-$sql =  "SELECT Province, City_ID, City_Name FROM city WHERE 1";
-$result =mysqli_query($conn, $sql); 
-
-if (mysqli_num_rows($result) > 0) {
-    echo "<table><tr><th>ID</th><th>Name</th></tr>";
-    // output data of each row
-    while($row = mysqli_fetch_assoc($result)) {
-        echo "<tr><td>".$row["City_ID"]."</td><td>".$row["Province"]." ".$row["City_Name"]."</td></tr>";
-    }
-    echo "</table>";
-} else {
-    echo "0 results";
+if(isset($_POST['cityid']))
+{
+    $cityid = $_POST['cityid'];
 }
 
-if(mysqli_num_rows($result)>0 )
+$sql =  "SELECT * FROM city WHERE City_ID = '$cityid'";
+$result =mysqli_query($conn, $sql); 
+/*
+if (mysqli_num_rows($result) > 0)
 {
-    while($row =mysqli_fetch_assoc($result))
+    while($row = mysqli_fetch_assoc($result))
     {
-        echo nl2br("City Name: " . $row["Province"] );
+        echo nl2br($row["City_ID"] . $row["Province"] .$row["City_Name"]."\n");
     }
 }
 
@@ -38,6 +31,26 @@ else
 {
     echo "0 results";
 }
+*/
+
+echo "<tr>";
+while ($col = $result->fetch_field()) {
+    echo "<th>" . $col->name . "  \t  " ."</th>";
+}
+echo "</tr>";
+
+if (mysqli_num_rows($result) > 0) {
+    echo "<table><tr><th>ID</th><th>Name</th></tr>";
+    // output data of each row
+    while($row = mysqli_fetch_assoc($result)) {
+        echo "<tr><td>".$row["City_ID"]."</td><td>".$row["City_Name"]."\t\t ".$row["Country_Code"]."</td></tr>";
+    }
+    echo "</table>";
+} else {
+    echo "0 results";
+}
+
+
 
 $conn->close();
 ?> 
