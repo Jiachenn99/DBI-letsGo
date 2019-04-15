@@ -1,5 +1,24 @@
+<?php
+$servername = "localhost";
+$username = "root";
+$password = "";
+$databaseName = "test2";
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $databaseName);
+
+// Check connection
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
+}
+
+
+$conn->close();
+?> 
+
 <!DOCTYPE html>
 <html lang="en">
+    
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,10 +46,11 @@
                     <div class="pb-3">
                         <h1> Look up the Cities you want! </h1>
                     </div>
-                    <form>
+                    <form action = "display.php" method ="post">
                         <div class="form-group">
-                            <input type="text" class="form-control"
+                            <input type="text" name = "cityid" class="form-control"
                                 placeholder="Search for countries, cities or languages">
+                            <!--<input type = "text" name = "countrycode" class = "form-control" placeholder="lmao"> -->
                             </div>
                         <button type="submit" class="btn btn-primary">Search</button>
                     </form>
