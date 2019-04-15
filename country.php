@@ -1,13 +1,11 @@
-
-
 <!DOCTYPE html>
 <html>
     <head>
 		<div class="topnav" id="myTopnav">
 		<a href="world.php" >Home</a>
 		<a href="country.php" class="active">Country</a>
-		<a href="#contact">City</a>			//havent link
-		<a href="#about">Language</a>				//havent link
+		<a href="city.php">City</a>
+		<a href="language.php">Language</a>
 		<a href="javascript:void(0);" class="icon" onclick="myFunction()">
 			<i class="fa fa-bars"></i>
 		</a>
@@ -132,10 +130,7 @@
             </div>
 		</div>
 		<p></p>
-		<p></p>
-			 
-			 
-				 
+		<p></p>				 
 	</body>
 </html>
 
