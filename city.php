@@ -1,4 +1,3 @@
-
 <?php
 	//Update Country code
 
@@ -23,9 +22,6 @@
 		}
 		
 	}
-
-
-
 
 ?>
 
@@ -165,9 +161,7 @@
 	</body>
 </html>
 
-			<?php
-				  	
-					
+			<?php				  						
 					//Table headers
 					echo "<table border='1'>
                     <th>City Name</th >
@@ -185,7 +179,7 @@
 					{
 						$keyword = $_POST['selection'];
 						//Query based off keywords
-						$sqlsecond =  "SELECT * FROM city WHERE City_Name = '$keyword' OR Province = '$keyword'";
+						$sqlsecond =  "SELECT * FROM city WHERE City_Name = '$keyword' OR Province = '$keyword' OR City_ID = '$keyword' OR Country_Code = '$keyword'";
 						//Query the database
 						$querycity = mysqli_query($conn, $sqlsecond); 
 
@@ -202,7 +196,7 @@
                             echo "<td>" . utf8_encode($row['Province']) . "</td>";
 							echo "<td>" . utf8_encode($row['Population']) . "</td>";
 							echo "<td><a href='updateCity.php?id=".$row['City_ID']."'>Update</a></td>";
-							echo "<td>" . Delete . "</td>";;
+							echo "<td><a href='deleteCity.php?id=".$row['City_ID']."'>Delete</a></td>";
                             echo "</tr>";
                         }
                     echo "</table>";

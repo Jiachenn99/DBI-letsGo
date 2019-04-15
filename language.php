@@ -184,7 +184,7 @@
 					{
 						$keyword = $_POST['selection'];
 						//Query based off keywords
-						$sqlthird =  "SELECT * FROM language WHERE Language = '$keyword'";
+						$sqlthird =  "SELECT * FROM language WHERE Language = '$keyword' OR Country_Code = '$keyword'";
 						//Query the database
 						$querylanguage = mysqli_query($conn, $sqlthird); 
 
@@ -201,7 +201,7 @@
                             echo "<td>" . utf8_encode($row['Official_Language']) . "</td>";
 							echo "<td>" . utf8_encode($row['Percentage_of_Use']) . "</td>";
 							echo "<td><a href='updateLanguage.php?language=".$row['Language']."&country_code=".$row['Country_Code']."'>Update</a></td>";
-							echo "<td>" . Delete . "</td>";;
+							echo "<td><a href='deleteLanguage.php?language=".$row['Language']."&country_code=".$row['Country_Code']."'>Delete</a></td>";
                             echo "</tr>";
                         }
 echo "</table>";

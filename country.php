@@ -36,9 +36,6 @@
 		
 	}
 
-
-
-
 ?>
 
 <!DOCTYPE html>
@@ -179,13 +176,7 @@
 
 			<?php
 				
-					  
-					//SELECT statement
-					/*$sqlsecond = "SELECT * FROM country WHERE Country_Code = '$keyword' OR Country_Name = '$keyword' OR Continent = '$keyword' OR  Region = '$keyword' OR Area_km2 = '$keyword'
-					OR Year_of_Independence = '$keyword' OR Population = '$keyword' OR Life_Expectancy = '$keyword' OR GNP = '$keyword' OR GNP_Old = '$keyword' OR Alternative_Names = '$keyword'
-					OR Ruling_System = '$keyword' OR Founder = '$keyword' OR City_ID = '$keyword' OR ISO_Code = '$keyword'";*/				
-					 
-					//Table headers
+						//Table headers
 					echo "<table border='1'>
 							<th>Country Code</th>
 							<th>Country Name</th>
@@ -212,9 +203,13 @@
 
 					if(isset($_POST['selection']))
 					{
-						$keyword = $_POST['selection'];
 						//Query based off keywords
-						$sqlsecond = "SELECT * FROM  country WHERE Country_Name = '$keyword' OR Country_Code = '$keyword'";
+						$keyword = $_POST['selection'];
+						//SELECT statement
+						$sqlsecond = "SELECT * FROM country WHERE Country_Code = '$keyword' OR Country_Name = '$keyword' OR Continent = '$keyword' OR  Region = '$keyword'
+						OR Year_of_Independence = '$keyword' OR Life_Expectancy = '$keyword' OR GNP = '$keyword' OR GNP_Old = '$keyword' OR Alternative_Names = '$keyword'
+						OR Ruling_System = '$keyword' OR Founder = '$keyword' OR City_ID = '$keyword' OR ISO_Code = '$keyword'";	
+						//$sqlsecond = "SELECT * FROM  country WHERE Country_Name = '$keyword' OR Country_Code = '$keyword'";
 						//Query the database
 						$querycountry = mysqli_query($conn, $sqlsecond); 
 
@@ -243,7 +238,7 @@
 							echo "<td>" . utf8_encode($row['City_ID']) . "</td>";
 							echo "<td>" . utf8_encode($row['ISO_Code']) . "</td>";
 							echo "<td><a href='updateCountry.php?id=".$row['Country_Code']."'>Update</a></td>";
-							echo "<td>" . utf8_encode($row['ISO_Code']) . "</td>";
+							echo "<td><a href='deleteCountry.php?id=".$row['Country_Code']."'>Delete</a></td>";
 							echo "</tr>";
 						}
 						echo "</table>";
