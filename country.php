@@ -201,7 +201,10 @@
 							<th>Ruling System</th>
 							<th>Founder</th>
 							<th>City_ID</th>
-							<th>ISO_Code</th>";
+							<th>ISO_Code</th>
+							<th>Update</th>
+							<th>Delete</th>"
+							;
 
 					//Display a table to user first
 					$dispall = "SELECT * FROM country";
@@ -238,6 +241,8 @@
 							echo "<td>" . utf8_encode($row['Ruling_System']) . "</td>";
 							echo "<td>" . utf8_encode($row['Founder']) . "</td>";
 							echo "<td>" . utf8_encode($row['City_ID']) . "</td>";
+							echo "<td>" . utf8_encode($row['ISO_Code']) . "</td>";
+							echo "<td><a href='updateCountry.php?id=".$row['Country_Code']."'>Update</a></td>";
 							echo "<td>" . utf8_encode($row['ISO_Code']) . "</td>";
 							echo "</tr>";
 						}
