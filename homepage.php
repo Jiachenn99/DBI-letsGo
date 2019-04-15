@@ -48,7 +48,7 @@ $conn->close();
                     </div>
                     <form action = "display.php" method ="post">
                         <div class="form-group">
-                            <input type="text" name = "cityid" class="form-control"
+                            <input type="text" name = "selection" class="form-control"
                                 placeholder="Search for countries, cities or languages">
                             <!--<input type = "text" name = "countrycode" class = "form-control" placeholder="lmao"> -->
                             </div>

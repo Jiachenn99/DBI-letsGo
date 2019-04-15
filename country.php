@@ -1,8 +1,4 @@
-<?php
 
-
-
-?>
 
 <!DOCTYPE html>
 <html>
@@ -125,9 +121,9 @@
                     <div class="pb-3">
                         <h2> Search Countries </h2>
                     </div>
-                    <form action = "country.php" method ="post">
+                    <form action = "country.php" method ="post" >
                         <div class="form-group">
-                            <input type="text" name = "search" class="form-control"
+                            <input type="text" name = "selection" class="form-control"
                                 placeholder="Search for countries"/>
                             </div>
                         <button type="submit" class="btn btn-primary">Search</button>
@@ -137,56 +133,79 @@
 		</div>
 		<p></p>
 		<p></p>
-    <table>
-		<tbody>
-			  <tr>
-				 <th>Country_Code</th>
-				 <th>Country_Name</th>
-				 <th>Continent</th>
-				 <th>Region</th>
-				 <th>Area</th>
-				 <th>Year_of_Independence</th>
-				 <th>Population</th>
-				 <th>Life_Expectancy</th>
-				 <th>GNP</th>
-				 <th>OldGNP</th>
-				 <th>Alt_Name</th>
-				 <th>Rulling_System</th>   
-				 <th>Founder</th> 
-				 <th>City_ID</th> 
-				 <th>ISO_code</th> 
-			  </tr>
-			  <tr>
-				  <?php
-					
-					include 'db_connection.php';
-
-					$conn = OpenCon();
-					$sql = "SELECT * from country";
-					$result = $conn-> query($sql);
-					
-					if(isset($_POST['search'])){
-						$searchq = $_POST['search'];
-						$searchq = preg_replace("#[^0-9a-z]#i","",$searchq);
-				
-						$query = "SELECT * FROM country WHERE Country_Name LIKE '%$searchq%' OR Country_Code LIKE '%$searchq%' ";
-						
-						$result = $conn-> query($query);
-					}	
-					
-				   if($result-> num_rows > 0){
-						while($row = $result-> fetch_assoc()){
-							echo "<tr><td>". utf8_encode($row["Country_Code"]) ."</td><td>". utf8_encode($row["Country_Name"]) ."</td><td>". $row["Continent"] ."</td><td>". $row	["Region"] ."</td><td>". $row["Area"] ."</td><td>". $row["Year_of_Independence"] ."</td><td>". $row["Country_Population"] ."</td><td>". $row["Life_Expectancy"] ."</td><td>". $row["GNP"] ."</td><td>". $row["OldGNP"] ."</td><td>". utf8_encode($row["Alt_Name"]) ."</td><td>". $row["Rulling_System"] ."</td><td>". utf8_encode($row["Founder"]) ."</td><td>". $row["City_ID"] ."</td><td>". $row["ISO_Code"] ."</td></tr>";
-						}
-						echo "</table>";
-					}
-				   else{
-						echo "0 result";
-					}
-				   $conn-> close();
-				   ?>
-			  </tr>
-		</tbody>
-	</table>
+			 
+			 
+				 
 	</body>
 </html>
+
+			<?php
+				  	//Connection
+					include 'db_connection.php';
+					$conn = OpenCon();
+					  
+					//SELECT statement
+					/*$sqlsecond = "SELECT * FROM country WHERE Country_Code = '$keyword' OR Country_Name = '$keyword' OR Continent = '$keyword' OR  Region = '$keyword' OR Area_km2 = '$keyword'
+					OR Year_of_Independence = '$keyword' OR Population = '$keyword' OR Life_Expectancy = '$keyword' OR GNP = '$keyword' OR GNP_Old = '$keyword' OR Alternative_Names = '$keyword'
+					OR Ruling_System = '$keyword' OR Founder = '$keyword' OR City_ID = '$keyword' OR ISO_Code = '$keyword'";*/				
+					 
+					//Table headers
+					echo "<table border='1'>
+							<th>Country Code</th>
+							<th>Country Name</th>
+							<th>Continent</th>
+							<th>Region</th>
+							<th>Area(km2)</th>
+							<th>Year of Independence</th>
+							<th>Population</th>
+							<th>Life Expectancy</th>
+							<th>GNP</th>
+							<th>Old GNP</th>
+							<th>Alternative Names</th>
+							<th>Ruling System</th>
+							<th>Founder</th>
+							<th>City_ID</th>
+							<th>ISO_Code</th>";
+
+					//Display a table to user first
+					$dispall = "SELECT * FROM country";
+					$querycountry = mysqli_query($conn, $dispall);
+
+					if(isset($_POST['selection']))
+					{
+						$keyword = $_POST['selection'];
+						//Query based off keywords
+						$sqlsecond = "SELECT * FROM  country WHERE Country_Name = '$keyword' OR Country_Code = '$keyword'";
+						//Query the database
+						$querycountry = mysqli_query($conn, $sqlsecond); 
+
+					}
+					
+					//Table for Country
+					
+					if(mysqli_num_rows($querycountry) > 0)
+					{
+						while($row = mysqli_fetch_assoc($querycountry))
+						{						
+							echo "<tr>";
+							echo "<td>" . utf8_encode($row['Country_Code']) . "</td>";
+							echo "<td>" . utf8_encode($row['Country_Name']) . "</td>";
+							echo "<td>" . utf8_encode($row['Continent']) . "</td>";
+							echo "<td>" . utf8_encode($row['Region']) . "</td>";
+							echo "<td>" . utf8_encode($row['Area_km2']) . "</td>";
+							echo "<td>" . utf8_encode($row['Year_of_Independence']) . "</td>";
+							echo "<td>" . utf8_encode($row['Population']) . "</td>";
+							echo "<td>" . utf8_encode($row['Life_Expectancy']) . "</td>";
+							echo "<td>" . utf8_encode($row['GNP']) . "</td>";
+							echo "<td>" . utf8_encode($row['GNP_Old']) . "</td>";
+							echo "<td>" . utf8_encode($row['Alternative_Names']) . "</td>";
+							echo "<td>" . utf8_encode($row['Ruling_System']) . "</td>";
+							echo "<td>" . utf8_encode($row['Founder']) . "</td>";
+							echo "<td>" . utf8_encode($row['City_ID']) . "</td>";
+							echo "<td>" . utf8_encode($row['ISO_Code']) . "</td>";
+							echo "</tr>";
+						}
+						echo "</table>";
+					}					
+					$conn-> close();
+			?>
