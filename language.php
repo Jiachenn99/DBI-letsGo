@@ -22,9 +22,6 @@
 		
 	}
 
-
-
-
 ?>
 
 
@@ -147,7 +144,7 @@
             <div class="row">
                 <div class="col-sm-6 offset-3">
                     <div class="pb-3">
-                        <h2> Search Languages you bonobos </h2>
+                        <h2> Search Languages for different countries! </h2>
                     </div>
                     <form action = "language.php" method ="post" >
                         <div class="form-group">

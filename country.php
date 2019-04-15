@@ -157,7 +157,7 @@
             <div class="row">
                 <div class="col-sm-6 offset-3">
                     <div class="pb-3">
-                        <h2> Search Countries </h2>
+                        <h2> Search Countries! </h2>
                     </div>
                     <form action = "country.php" method ="post" >
                         <div class="form-group">
@@ -207,8 +207,7 @@
 						$keyword = $_POST['selection'];
 						//SELECT statement
 						$sqlsecond = "SELECT * FROM country WHERE Country_Code = '$keyword' OR Country_Name = '$keyword' OR Continent = '$keyword' OR  Region = '$keyword'
-						OR Year_of_Independence = '$keyword' OR Life_Expectancy = '$keyword' OR GNP = '$keyword' OR GNP_Old = '$keyword' OR Alternative_Names = '$keyword'
-						OR Ruling_System = '$keyword' OR Founder = '$keyword' OR City_ID = '$keyword' OR ISO_Code = '$keyword'";	
+						OR Alternative_Names = '$keyword' OR Ruling_System = '$keyword' OR Founder = '$keyword' OR City_ID = '$keyword' OR ISO_Code = '$keyword'";	
 						//$sqlsecond = "SELECT * FROM  country WHERE Country_Name = '$keyword' OR Country_Code = '$keyword'";
 						//Query the database
 						$querycountry = mysqli_query($conn, $sqlsecond); 

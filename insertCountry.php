@@ -4,8 +4,8 @@
         <div class="topnav" id="myTopnav">
 		<a href="world.php" >Home</a>
 		<a href="country.php" class="active">Country</a>
-		<a href="#contact">City</a>			//havent link
-		<a href="#about">Language</a>				//havent link
+		<a href="city.php">City</a>
+		<a href="language.php">Language</a>
 		<a href="javascript:void(0);" class="icon" onclick="myFunction()">
 			<i class="fa fa-bars"></i>
 		</a>
@@ -158,12 +158,13 @@
             $ID = $_POST['addID'];
             $Code = $_POST['addCode'];
             if($CC != '' || $CN != ''){
-                $query = ("INSERT INTO country(Country_Code,Country_Name,Continent,Region,Area,Year_of_Independence,Country_Population,Life_Expectancy,GNP,OldGNP,Alt_Name,Rulling_System,Founder,City_ID,ISO_Code) 
+                $query = ("INSERT INTO country
                 VALUES ('$CC','$CN','$Cont','$Reg','$Area','$YoI','$Pop','$LE','$GNP','$oGNP','$AN','$RS','$Founder','$ID','$Code')");
                 
                 $result = $conn-> query($query);
                 
                 echo "<br/><br/><span>Data Inserted successfully...!!</span>";
+                header("Location: country.php");
             }
             else{
             echo "<p>Insertion Failed <br/> Some Fields are Blank....!!</p>";

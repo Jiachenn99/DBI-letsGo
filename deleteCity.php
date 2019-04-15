@@ -17,10 +17,4 @@
 
     //Redirect to City main page
     header("Location: city.php");
-
-
-
-
-
-
 ?>

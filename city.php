@@ -144,7 +144,7 @@
             <div class="row">
                 <div class="col-sm-6 offset-3">
                     <div class="pb-3">
-                        <h2> Search cities you dumbfucks </h2>
+                        <h2> Search cities here! </h2>
                     </div>
                     <form action = "city.php" method ="post" >
                         <div class="form-group">
