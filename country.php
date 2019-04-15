@@ -1,13 +1,6 @@
 <?php
 
-if(isset($_POST['search'])){
-		$searchq = $_POST['search'];
-		$searchq = preg_replace("#[^0-9a-z]#i","",$searchq);
 
-		$query = mysql_query("SELECT * FROM country WHERE ") or die("could not search!");
-
- 
-}
 
 ?>
 
@@ -143,6 +136,7 @@ if(isset($_POST['search'])){
             </div>
 		</div>
 		<p></p>
+		<p></p>
     <table>
 		<tbody>
 			  <tr>
@@ -155,8 +149,8 @@ if(isset($_POST['search'])){
 				 <th>Population</th>
 				 <th>Life_Expectancy</th>
 				 <th>GNP</th>
-				 <th>GNPOld</th>
-				 <th>Alt_Names</th>
+				 <th>OldGNP</th>
+				 <th>Alt_Name</th>
 				 <th>Rulling_System</th>   
 				 <th>Founder</th> 
 				 <th>City_ID</th> 
@@ -171,6 +165,14 @@ if(isset($_POST['search'])){
 					$sql = "SELECT * from country";
 					$result = $conn-> query($sql);
 					
+					if(isset($_POST['search'])){
+						$searchq = $_POST['search'];
+						$searchq = preg_replace("#[^0-9a-z]#i","",$searchq);
+				
+						$query = "SELECT * FROM country WHERE Country_Name LIKE '%$searchq%' OR Country_Code LIKE '%$searchq%' ";
+						
+						$result = $conn-> query($query);
+					}	
 					
 				   if($result-> num_rows > 0){
 						while($row = $result-> fetch_assoc()){
