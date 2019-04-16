@@ -245,8 +245,9 @@
                             </div>
                         <button type="submit" class="btn btn-primary">Search</button>
                     </form>
+					<br>
 					<form action = "insertCity.php" method ="post">
-					<button type="submit" name =addbutton class="btn btn-primary">Add Country fields</button>
+					<button type="submit" name =addbutton class="btn btn-primary">Add City fields</button>
                 </div>
             </div>
 		</div>

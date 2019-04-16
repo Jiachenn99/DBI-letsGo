@@ -21,7 +21,7 @@
 <?php 
 
     //Connection
-    nclude 'db_connection.php';
+    include 'db_connection.php';
 	$conn = OpenCon();
 
 // Check connection

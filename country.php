@@ -63,17 +63,14 @@
 		   font-family: monospace;
 		   font-size: 15px;
 		   text-align: left;
-		   margin: 0px 0px 0px 10px;
 		   overflow-x : auto;
 			 } 
+			 
 		  th {
 		   background-color: #588c7e;
 		   color: white;
 			}
 		  
-		  body {
-			  background-color: beige;
-		  }
 
 			.topnav {
 			overflow: hidden;
@@ -130,6 +127,7 @@
 			width:100%;
 			table-layout: fixed;
 			}
+			
 			.tbl-header{
 			background-color: rgba(255,255,255,0.3);
 			}
@@ -146,9 +144,11 @@
 			font-size: 12px;
 			color: #fff;
 			text-transform: uppercase;
+			word-wrap:break-word;
 			}
 			td{
-			padding: 15px;
+			word-wrap: break-word;
+			padding: 5px;
 			text-align: left;
 			vertical-align:middle;
 			font-weight: 300;
@@ -191,6 +191,7 @@
 			.made-with-love a {
 			color: #fff;
 			text-decoration: none;
+
 			}
 			.made-with-love a:hover {
 			text-decoration: underline;
@@ -198,7 +199,6 @@
 
 
 			/* for custom scrollbar for webkit browser*/
-
 			::-webkit-scrollbar {
 				width: 6px;
 			} 
@@ -261,18 +261,19 @@
                             </div>
                         <button type="submit" class="btn btn-primary">Search</button>
                     </form>
-					
-                </div>
-				<form action = "insertCountry.php" method ="post">
+					<form action = "insertCountry.php" method ="post">
+					<br>
 					<button type="submit" name =addbutton class="btn btn-primary">Add Country fields</button>
-				</form>
+				</form>	
+                </div>
+				
             </div>
 		</div>
 		<p></p>
 		<p></p>	
 		<div style="overflow-x:auto;">
 			<div class="tbl-content">
-			<table cellpadding="0" cellspacing="0" border="0">
+			<table cellpadding="3" cellspacing="3" border="1">
 			<?php
 				//SELECT
 						
@@ -314,8 +315,8 @@
 					<th>Founder</th>
 					<th>City_ID</th>
 					<th>ISO_Code</th>
-					<th>Update</th>
-					<th>Delete</th>"
+					<th>Edit</th>
+"
 					;
 						while($row = mysqli_fetch_assoc($querycountry))
 						{						
@@ -335,8 +336,8 @@
 							echo "<td>" . utf8_encode($row['Founder']) . "</td>";
 							echo "<td>" . utf8_encode($row['City_ID']) . "</td>";
 							echo "<td>" . utf8_encode($row['ISO_Code']) . "</td>";
-							echo "<td><a href='updateCountry.php?id=".$row['Country_Code']."'>Update</a></td>";
-							echo "<td><a href='deleteCountry.php?id=".$row['Country_Code']."'>Delete</a></td>";
+							echo "<td><a href='updateCountry.php?id=".$row['Country_Code']."'>Update</a><br><a href='deleteCountry.php?id=".$row['Country_Code']."'>Delete</a></td>";
+							
 							echo "</tr>";
 						}
 					}

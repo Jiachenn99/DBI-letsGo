@@ -243,6 +243,10 @@
                             </div>
                         <button type="submit" class="btn btn-primary">Search </button>
                     </form>
+					<form action = "insertLanguage.php" method ="post">
+					<br>
+					<button type="submit" name =addbutton class="btn btn-primary">Add Language fields</button>
+				</form>	
                 </div>
             </div>
 		</div>
