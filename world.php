@@ -11,6 +11,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+	<link rel="stylesheet" href="cssbeebo.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">  
 	<div class="topnav" id="myTopnav">
 	<a href="world.php" class="active">Home</a>

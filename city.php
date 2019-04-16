@@ -39,7 +39,7 @@
 		</a>
 		</div>
     <style>
-			h1{
+				h1{
 				text-align: center;
 				background-color: green;
 			}
@@ -50,23 +50,14 @@
 		   font-family: monospace;
 		   font-size: 15px;
 		   text-align: left;
-		   margin: 0px 0px 0px 10px;
+		
 			 } 
 		  th {
 		   background-color: #588c7e;
 		   color: white;
 			}
-		  tr:nth-child(even) {background-color: #f2f2f2}
-
-		  td{
-			  width: 30%;
-		  }
-
-	
 		  
-		  body {
-			  background-color: beige;
-		  }
+		  
 
 			.topnav {
 			overflow: hidden;
@@ -118,6 +109,92 @@
 				text-align: left;
 			}
 			}
+
+			table{
+			width:100%;
+			table-layout: fixed;
+			}
+			.tbl-header{
+			background-color: rgba(255,255,255,0.3);
+			}
+			.tbl-content{
+			height:300px;
+			overflow-x:auto;
+			margin-top: 0px;
+			border: 1px solid rgba(255,255,255,0.3);
+			}
+			th{
+			padding: 20px 15px;
+			text-align: left;
+			font-weight: 500;
+			font-size: 12px;
+			color: #fff;
+			text-transform: uppercase;
+			}
+			td{
+			padding: 15px;
+			text-align: left;
+			vertical-align:middle;
+			font-weight: 300;
+			font-size: 12px;
+			color: #fff;
+			border-bottom: solid 1px rgba(255,255,255,0.1);
+			}
+
+
+			/* demo styles */
+
+			@import url(https://fonts.googleapis.com/css?family=Roboto:400,500,300,700);
+			body{
+			background: -webkit-linear-gradient(left, #25c481, #25b7c4);
+			background: linear-gradient(to right, #25c481, #25b7c4);
+			font-family: 'Roboto', sans-serif;
+			}
+			section{
+			margin: 50px;
+			}
+
+
+			/* follow me template */
+			.made-with-love {
+			margin-top: 40px;
+			padding: 10px;
+			clear: left;
+			text-align: center;
+			font-size: 10px;
+			font-family: arial;
+			color: #fff;
+			}
+			.made-with-love i {
+			font-style: normal;
+			color: #F50057;
+			font-size: 14px;
+			position: relative;
+			top: 2px;
+			}
+			.made-with-love a {
+			color: #fff;
+			text-decoration: none;
+			}
+			.made-with-love a:hover {
+			text-decoration: underline;
+			}
+
+
+			/* for custom scrollbar for webkit browser*/
+
+			::-webkit-scrollbar {
+				width: 6px;
+			} 
+			::-webkit-scrollbar-track {
+				-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+			} 
+			::-webkit-scrollbar-thumb {
+				-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+			}
+			.wrapper {
+				text-align: right;
+			}
 	</style>
 
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -145,6 +222,13 @@
 			}
 			</script>
 
+			<script>
+			$(window).on("load resize ", function() {
+			var scrollWidth = $('.tbl-content').width() - $('.tbl-content table').width();
+				$('.tbl-header').css({'padding-right':scrollWidth});
+			}).resize();
+			</script>
+
 	</head>
 	<body>
 	<div id="form">
@@ -161,14 +245,17 @@
                             </div>
                         <button type="submit" class="btn btn-primary">Search</button>
                     </form>
+					<form action = "insertCity.php" method ="post">
+					<button type="submit" name =addbutton class="btn btn-primary">Add Country fields</button>
                 </div>
             </div>
 		</div>
 		<p></p>
-		<p></p>				 
-	</body>
-</html>
+		<p></p>	
 
+		<div class="tbl-content">
+			<table>
+			<tbody>
 			<?php	
 					//SELECT			  						
 					//Display a table to user first
@@ -218,3 +305,13 @@
 					}
 					$conn-> close();
 			?>
+			</tbody>
+		
+		</table>		
+		</div>	 
+	</body>
+	<div class="made-with-love">
+	<i>World Datasets 2019</i>
+	</div>
+</html>
+		
