@@ -28,6 +28,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
 		<div class="topnav" id="myTopnav">
 		<a href="world.php" >Home</a>
 		<a href="country.php">Country</a>
@@ -47,8 +48,9 @@
 		   width: 100%;
 		   color: #588c7e;
 		   font-family: monospace;
-		   font-size: 12px;
+		   font-size: 15px;
 		   text-align: left;
+		   margin: 0px 0px 0px 10px;
 			 } 
 		  th {
 		   background-color: #588c7e;
@@ -149,9 +151,9 @@
                     <form action = "language.php" method ="post" >
                         <div class="form-group">
                             <input type="text" name = "selection" class="form-control"
-                                placeholder="Search for languages"/>
+                                placeholder="Search for languages or country codes~"/>
                             </div>
-                        <button type="submit" class="btn btn-primary">Search</button>
+                        <button type="submit" class="btn btn-primary">Search </button>
                     </form>
                 </div>
             </div>
@@ -163,15 +165,7 @@
 
 			<?php
 					
-					//Table headers
-					echo "<table border='1'>
-                    <th>Country Code</th>
-                    <th>Language</th>
-                    <th>Official_Language</th>
-					<th>Percentage_of_Use</th>
-					<th>Update</th>
-					<th>Delete</th>"
-					;
+					
 
 					//Display a table to user first
 					$dispall = "SELECT * FROM language";
@@ -181,15 +175,25 @@
 					{
 						$keyword = $_POST['selection'];
 						//Query based off keywords
-						$sqlthird =  "SELECT * FROM language WHERE Language = '$keyword' OR Country_Code = '$keyword'";
+						$sqlthird =  "SELECT * FROM language WHERE Language LIKE '$keyword' OR Country_Code LIKE '$keyword%'";
 						//Query the database
 						$querylanguage = mysqli_query($conn, $sqlthird); 
 
 					}
 					
-					//Table for Country					
+					//Table for Language					
 					if(mysqli_num_rows($querylanguage) > 0)
 					{
+						//Table headers
+						echo "<table border='1'>
+						<th>Country Code</th>
+						<th>Language</th>
+						<th>Official_Language</th>
+						<th>Percentage_of_Use</th>
+						<th>Update</th>
+						<th>Delete</th>"
+						;
+
 						while($row = mysqli_fetch_assoc($querylanguage))
 						{						
 							echo "<tr>";
@@ -201,7 +205,12 @@
 							echo "<td><a href='deleteLanguage.php?language=".$row['Language']."&country_code=".$row['Country_Code']."'>Delete</a></td>";
                             echo "</tr>";
                         }
-echo "</table>";
-					}					
+					 echo "</table>";
+					}			
+					
+					else
+					{
+						printf("No such query found.");
+					}
 					$conn-> close();
 			?>

@@ -41,6 +41,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
 		<div class="topnav" id="myTopnav">
 		<a href="world.php" >Home</a>
 		<a href="country.php" class="active">Country</a>
@@ -60,8 +61,10 @@
 		   width: 100%;
 		   color: #588c7e;
 		   font-family: monospace;
-		   font-size: 12px;
+		   font-size: 15px;
 		   text-align: left;
+		   margin: 0px 0px 0px 10px;
+		   overflow-x : auto;
 			 } 
 		  th {
 		   background-color: #588c7e;
@@ -157,12 +160,12 @@
             <div class="row">
                 <div class="col-sm-6 offset-3">
                     <div class="pb-3">
-                        <h2> Search Countries! </h2>
+                        <h2> Search Countries here! </h2>
                     </div>
                     <form action = "country.php" method ="post" >
                         <div class="form-group">
                             <input type="text" name = "selection" class="form-control"
-                                placeholder="Search for countries"/>
+                                placeholder="Search for countries/ country code etc"/>
                             </div>
                         <button type="submit" class="btn btn-primary">Search</button>
                     </form>
@@ -175,27 +178,8 @@
 </html>
 
 			<?php
-				
-						//Table headers
-					echo "<table border='1'>
-							<th>Country Code</th>
-							<th>Country Name</th>
-							<th>Continent</th>
-							<th>Region</th>
-							<th>Area(km2)</th>
-							<th>Year of Independence</th>
-							<th>Population</th>
-							<th>Life Expectancy</th>
-							<th>GNP</th>
-							<th>Old GNP</th>
-							<th>Alternative Names</th>
-							<th>Ruling System</th>
-							<th>Founder</th>
-							<th>City_ID</th>
-							<th>ISO_Code</th>
-							<th>Update</th>
-							<th>Delete</th>"
-							;
+				//SELECT
+						
 
 					//Display a table to user first
 					$dispall = "SELECT * FROM country";
@@ -206,18 +190,37 @@
 						//Query based off keywords
 						$keyword = $_POST['selection'];
 						//SELECT statement
-						$sqlsecond = "SELECT * FROM country WHERE Country_Code = '$keyword' OR Country_Name = '$keyword' OR Continent = '$keyword' OR  Region = '$keyword'
-						OR Alternative_Names = '$keyword' OR Ruling_System = '$keyword' OR Founder = '$keyword' OR City_ID = '$keyword' OR ISO_Code = '$keyword'";	
+						$sqlsecond = "SELECT * FROM country WHERE Country_Code LIKE '$keyword%' OR Country_Name LIKE '%$keyword%' OR Continent LIKE '$keyword%' OR  Region LIKE '$keyword%'
+						OR Alternative_Names LIKE '%$keyword%' OR Founder LIKE '%$keyword%' OR City_ID LIKE '$keyword' OR ISO_Code LIKE '$keyword%'";	
 						//$sqlsecond = "SELECT * FROM  country WHERE Country_Name = '$keyword' OR Country_Code = '$keyword'";
 						//Query the database
 						$querycountry = mysqli_query($conn, $sqlsecond); 
 
 					}
 					
-					//Table for Country
-					
+					//Table for Country					
 					if(mysqli_num_rows($querycountry) > 0)
 					{
+						//Table headers
+					echo "<table border='1'>
+					<th>Country Code</th>
+					<th>Country Name</th>
+					<th>Continent</th>
+					<th>Region</th>
+					<th>Area(km2)</th>
+					<th>Year of Independence</th>
+					<th>Population</th>
+					<th>Life Expectancy</th>
+					<th>GNP</th>
+					<th>Old GNP</th>
+					<th>Alternative Names</th>
+					<th>Ruling System</th>
+					<th>Founder</th>
+					<th>City_ID</th>
+					<th>ISO_Code</th>
+					<th>Update</th>
+					<th>Delete</th>"
+					;
 						while($row = mysqli_fetch_assoc($querycountry))
 						{						
 							echo "<tr>";
@@ -240,7 +243,11 @@
 							echo "<td><a href='deleteCountry.php?id=".$row['Country_Code']."'>Delete</a></td>";
 							echo "</tr>";
 						}
+					}
+					else{
+						printf("No such country found"); 
+						}
 						echo "</table>";
-					}					
+										
 					$conn-> close();
 			?>

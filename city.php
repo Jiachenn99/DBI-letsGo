@@ -28,6 +28,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
 		<div class="topnav" id="myTopnav">
 		<a href="world.php" >Home</a>
 		<a href="country.php">Country</a>
@@ -47,14 +48,21 @@
 		   width: 100%;
 		   color: #588c7e;
 		   font-family: monospace;
-		   font-size: 12px;
+		   font-size: 15px;
 		   text-align: left;
+		   margin: 0px 0px 0px 10px;
 			 } 
 		  th {
 		   background-color: #588c7e;
 		   color: white;
 			}
 		  tr:nth-child(even) {background-color: #f2f2f2}
+
+		  td{
+			  width: 30%;
+		  }
+
+	
 		  
 		  body {
 			  background-color: beige;
@@ -149,7 +157,7 @@
                     <form action = "city.php" method ="post" >
                         <div class="form-group">
                             <input type="text" name = "selection" class="form-control"
-                                placeholder="Search for cities"/>
+                                placeholder="Search for cities or country codes?"/>
                             </div>
                         <button type="submit" class="btn btn-primary">Search</button>
                     </form>
@@ -161,16 +169,8 @@
 	</body>
 </html>
 
-			<?php				  						
-					//Table headers
-					echo "<table border='1'>
-                    <th>City Name</th >
-                    <th>Country Code</th>
-                    <th>Province</th>
-					<th>Population</th>
-					<th>Update</th>
-					<th>Delete</th>";
-
+			<?php	
+					//SELECT			  						
 					//Display a table to user first
 					$dispall = "SELECT * FROM city";
 					$querycity = mysqli_query($conn, $dispall);
@@ -179,18 +179,28 @@
 					{
 						$keyword = $_POST['selection'];
 						//Query based off keywords
-						$sqlsecond =  "SELECT * FROM city WHERE City_Name = '$keyword' OR Province = '$keyword' OR City_ID = '$keyword' OR Country_Code = '$keyword'";
+						$sqlsecond =  "SELECT * FROM city WHERE City_Name LIKE '$keyword%' OR Province LIKE '$keyword%' OR City_ID = '$keyword' OR Country_Code LIKE '$keyword%'";
 						//Query the database
 						$querycity = mysqli_query($conn, $sqlsecond); 
 
 					}
 					
-					//Table for Country					
+					//Table for City					
 					if(mysqli_num_rows($querycity) > 0)
 					{
+						//Table headers
+						echo "<table border='1'>
+						<th>City ID </th>
+						<th>City Name</th >
+						<th>Country Code</th>
+						<th>Province</th>
+						<th>Population</th>
+						<th>Update</th>
+						<th>Delete</th>";
 						while($row = mysqli_fetch_assoc($querycity))
 						{						
 							echo "<tr>";
+							echo "<td>" . utf8_encode($row['City_ID']) . "</td>";
                             echo "<td>" . utf8_encode($row['City_Name']) . "</td>";
                             echo "<td>" . utf8_encode($row['Country_Code']) . "</td>";
                             echo "<td>" . utf8_encode($row['Province']) . "</td>";
@@ -200,6 +210,11 @@
                             echo "</tr>";
                         }
                     echo "</table>";
-					}					
+					}	
+					
+					else
+					{
+						printf("No such city found.");
+					}
 					$conn-> close();
 			?>
