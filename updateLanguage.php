@@ -20,13 +20,9 @@
 
 <?php 
 
-$servername = "localhost";
-$username = "mamp";
-$password = "";
-$databaseName = "world";
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $databaseName);
+    //Connection
+    nclude 'db_connection.php';
+	$conn = OpenCon();
 
 // Check connection
 if (!$conn) {

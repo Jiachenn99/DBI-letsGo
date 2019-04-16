@@ -11,6 +11,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">  
 	<div class="topnav" id="myTopnav">
 	<a href="world.php" class="active">Home</a>
 	<a href="country.php">Country</a>	
@@ -23,8 +24,9 @@
 		<style>
 		  h1{
 			text-align: left;
-			background-color: ;
 		  }
+
+		  
 		  table {
 		   border-collapse: collapse;
 		   width: 100%;
@@ -87,8 +89,9 @@
 				float: none;
 				display: block;
 				text-align: left;
+			
 			}
-			}
+		}
 		</style>
 
         <title>World dataset</title>
@@ -126,14 +129,8 @@
                     <div class="pb-3">
 						<h1> World Datasets </h1>
                         <h1> Start searching! </h1>
+						<body>
                     </div>
-                    <form>
-                        <div class="form-group">
-                            <input type="text" class="form-control"
-                                placeholder="Search for countries, cities or languages">
-                            </div>
-                        <button type="submit" class="btn btn-primary">Search</button>
-                    </form>
                 </div>
             </div>
 		</div>

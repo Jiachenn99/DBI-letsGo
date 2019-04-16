@@ -20,18 +20,8 @@
 
 <?php 
 
-$servername = "localhost";
-$username = "mamp";
-$password = "";
-$databaseName = "world";
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $databaseName);
-
-// Check connection
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
-}
+    include 'db_connection.php';
+	$conn = OpenCon();
 
 if(isset($_GET['id'])){
     $id = $_GET['id'];
