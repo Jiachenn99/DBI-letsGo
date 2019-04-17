@@ -2,7 +2,7 @@
 
 function OpenCon()
  {
- $dbhost = "Localhost";
+ $dbhost = "localhost";
  $dbuser = "hfyjc3_user1";
  $dbpass = "z7g&HF8jC-3Y";
  $db = "hfyjc3_world";
